@@ -1,6 +1,6 @@
 # ossp_t
 # 주제
-테트리스 게임
+파이선을 이용한 테트리스 게임
 
 # 참고 사이트 및 소스
 
@@ -15,4 +15,4 @@ GNU
 
 
 # 깃허브 작업 로그
-.
+![image](https://user-images.githubusercontent.com/121841830/211617488-ae885f4f-f9e2-41ca-8b8c-0d009ca873e9.png)
