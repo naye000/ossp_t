@@ -18,4 +18,4 @@ GNU
 # 깃허브 작업 로그
 ![log](https://user-images.githubusercontent.com/121841830/211715334-1e7c4855-f533-4dd7-8629-3284f30913f3.png)
 
-![image](https://user-images.githubusercontent.com/121841830/211617488-ae885f4f-f9e2-41ca-8b8c-0d009ca873e9.png)
+![log2](https://user-images.githubusercontent.com/121841830/211719154-974aa696-12e0-4f57-b08f-30fbc5ee101b.png)
