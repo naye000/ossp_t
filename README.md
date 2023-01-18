@@ -4,16 +4,17 @@
 파이선을 이용한 테트리스 게임
 
 # 참고 사이트 및 소스
-![source](https://user-images.githubusercontent.com/121841830/211716086-6bd65858-2b45-48c8-b6aa-e8f332a7a33e.png)
+
 https://github.com/CSID-DGU/2020-2-OSSP-CP--YamiYami_Z_Z-5
 //변경
 https://github.com/hbseo/OSD_game.git
+
 # license
 GNU
 
 # 진행 중인 기존 소스와 차별점
 
-목표- 게임의 배경 화면을 추가하여 변경할 수 있는 메뉴를 추가하기
+레벨이 올라갈수록 블록이 내려오는 속도가 증가합니다.
  
 # 깃허브 작업 로그
 ![log](https://user-images.githubusercontent.com/121841830/211715334-1e7c4855-f533-4dd7-8629-3284f30913f3.png)
