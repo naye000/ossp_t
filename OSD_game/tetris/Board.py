@@ -19,8 +19,8 @@ LIGHTYELLOW = (175, 175,  20)
 class Board:
     COLLIDE_ERROR = {'no_error' : 0, 'right_wall':1, 'left_wall':2,
                      'bottom':3, 'overlap':4}
-
-    def __init__(self, screen):
+#위에 충돌 에러 
+    def __init__(self, screen): #스크린 사이즈
         self.screen = screen
         self.width = 10
         self.height = 20
@@ -28,7 +28,7 @@ class Board:
         self.init_board()
         self.generate_piece()
 
-    def init_board(self):
+    def init_board(self): #1단계시의 설정
         self.board = []
         self.score = 0
         self.level = 1
@@ -37,12 +37,12 @@ class Board:
         for _ in range(self.height):
             self.board.append([0]*self.width)
 
-    def generate_piece(self):
+    def generate_piece(self): #블럭 생성
         self.piece = Piece()
         self.next_piece = Piece()
         self.piece_x, self.piece_y = 3,0
 
-    def nextpiece(self):
+    def nextpiece(self): #다음 블럭
         self.piece = self.next_piece
         self.next_piece = Piece()
         self.piece_x, self.piece_y = 3, 0
@@ -57,15 +57,15 @@ class Board:
         if self.skill < 100:
             self.skill += 2
 
-    def block_collide_with_board(self, x, y):
+    def block_collide_with_board(self, x, y): #충돌 관련
         if x < 0:
-            return Board.COLLIDE_ERROR['left_wall']
+            return Board.COLLIDE_ERROR['left_wall'] #왼쪽 벽
         elif x >= self.width:
-            return Board.COLLIDE_ERROR['right_wall']
+            return Board.COLLIDE_ERROR['right_wall'] #오른쪽 벽
         elif y >= self.height:
-            return Board.COLLIDE_ERROR['bottom']
+            return Board.COLLIDE_ERROR['bottom'] #아래(세로 길이)
         elif self.board[y][x]:
-            return Board.COLLIDE_ERROR['overlap']
+            return Board.COLLIDE_ERROR['overlap'] #블록이 다 쌓였을 때??
         return Board.COLLIDE_ERROR['no_error']
 
     def collide_with_board(self, dx, dy):
@@ -77,29 +77,29 @@ class Board:
                         return collide
         return Board.COLLIDE_ERROR['no_error']
 
-    def can_move_piece(self, dx, dy):
+    def can_move_piece(self, dx, dy): #블럭을 움직일 수 있을 때 판단
         _dx = self.piece_x + dx
         _dy = self.piece_y + dy
         if self.collide_with_board(dx = _dx, dy = _dy):
             return False
         return True
 
-    def can_drop_piece(self):
+    def can_drop_piece(self): #블럭을 한 칸 내릴 수 있는 지 판단
         return self.can_move_piece(dx=0, dy=1)
 
-    def try_rotate_piece(self, clockwise=True):
+    def try_rotate_piece(self, clockwise=True): #블럭 회전 시도?
         self.piece.rotate(clockwise)
         collide = self.collide_with_board(dx=self.piece_x, dy=self.piece_y)
-        if not collide:
+        if not collide: #충돌이 없으면 pass
             pass
-        elif collide == Board.COLLIDE_ERROR['left_wall']:
+        elif collide == Board.COLLIDE_ERROR['left_wall']: #왼쪽 벽과 충돌
             if self.can_move_piece(dx=1, dy=0):
                 self.move_piece(dx=1, dy=0)
             elif self.can_move_piece(dx=2, dy=0):
                 self.move_piece(dx=2, dy=0)
             else:
                 self.piece.rotate(not clockwise)
-        elif collide == Board.COLLIDE_ERROR['right_wall']:
+        elif collide == Board.COLLIDE_ERROR['right_wall']: #오른쪽 벽과 충돌
             if self.can_move_piece(dx=-1, dy=0):
                 self.move_piece(dx=-1, dy=0)
             elif self.can_move_piece(dx=-2, dy=0):
@@ -109,24 +109,24 @@ class Board:
         else:
             self.piece.rotate(not clockwise)
 
-    def move_piece(self, dx, dy):
+    def move_piece(self, dx, dy): #블럭 움직이기
         if self.can_move_piece(dx, dy):
             self.piece_x += dx
             self.piece_y += dy
 
-    def drop_piece(self):
+    def drop_piece(self): #블럭 내리기
         if self.can_drop_piece():
             self.move_piece(dx=0, dy=1)
         else:
             self.absorb_piece()
             self.delete_lines()
 
-    def full_drop_piece(self):
+    def full_drop_piece(self): #블럭 끝까지 내리기
         while self.can_drop_piece():
             self.drop_piece()
         self.drop_piece()
 
-    def rotate_piece(self, clockwise=True):
+    def rotate_piece(self, clockwise=True): #블럭 회전
         self.try_rotate_piece(clockwise)
 
     def pos_to_pixel(self, x, y):
@@ -135,7 +135,7 @@ class Board:
     def pos_to_pixel_next(self, x, y):
         return self.block_size*x*0.6, self.block_size*(y-2)*0.6
 
-    def delete_line(self, y):
+    def delete_line(self, y): #라인 삭제
         for y in reversed(range(1, y+1)):
             self.board[y] = list(self.board[y-1])
 
@@ -167,10 +167,10 @@ class Board:
         else:
             pygame.time.set_timer(pygame.USEREVENT, (Var.user_start_speed - Var.user_per_speed * self.level))
 
-    def game_over(self):
+    def game_over(self): #게임 종료
         return sum(self.board[0]) > 0 or sum(self.board[1]) > 0
 
-    def draw_blocks(self, array2d, color=WHITE, dx=0, dy=0):
+    def draw_blocks(self, array2d, color=WHITE, dx=0, dy=0): #현재 블럭 
         for y, row in enumerate(array2d):
             y += dy
             if y >= 2 and y < self.height:
@@ -191,7 +191,7 @@ class Board:
                         pygame.draw.rect(self.screen, BLACK,
                                         (x_pix, y_pix, self.block_size, self.block_size), 1)
 
-    def draw_next_piece(self, array2d, color=WHITE):
+    def draw_next_piece(self, array2d, color=WHITE): #다음 블럭
         for y, row in enumerate(array2d):
             for x, block in enumerate(row):
                 if block:
@@ -201,7 +201,7 @@ class Board:
                     pygame.draw.rect(self.screen, BLACK,
                                     (x_pix+240, y_pix+65, self.block_size * 0.5, self.block_size * 0.5),1)
 
-    def draw(self):
+    def draw(self): #오른쪽의 박스 내용들
         now = datetime.datetime.now()
         nowTime = now.strftime('%H:%M:%S')
         self.screen.fill(BLACK)
@@ -237,7 +237,7 @@ class Board:
         self.screen.blit(goal_value, (255,375))
         self.screen.blit(time_text, (255, 430))
 
-    def pause(self):
+    def pause(self): #일시정지
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', 32)
         textSurfaceObj = fontObj.render('Paused', True, GREEN)
         textRectObj = textSurfaceObj.get_rect()
@@ -258,7 +258,7 @@ class Board:
                 elif event.type == KEYUP and event.key == K_p:
                     running = False
 
-    def GameOver(self):
+    def GameOver(self): #게임 종료
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', 32)
         textSurfaceObj = fontObj.render('Game over', True, GREEN)
         textRectObj = textSurfaceObj.get_rect()
@@ -279,7 +279,7 @@ class Board:
                 elif event.type == KEYDOWN:
                     running = False
 
-    def newGame(self):
+    def newGame(self): #새 게임
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', 32)
         textSurfaceObj = fontObj.render('Tetris', True, GREEN)
         textRectObj = textSurfaceObj.get_rect()
@@ -324,7 +324,7 @@ class Board:
                     elif event.type == KEYDOWN:
                         running = False
 
-    def ultimate(self):
+    def ultimate(self): #스킬
         if self.skill == 100:
             bomb = pygame.image.load("assets/images/bomb.jpg")
             bomb = pygame.transform.scale(bomb, (350, 450))

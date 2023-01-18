@@ -25,6 +25,7 @@ class Tetris:
         self.music_on_off = True
         self.check_reset = True
 
+#각 키 누를 때 실행 되는 method
     def handle_key(self, event_key):
         if event_key == K_DOWN or event_key == K_s:
             self.board.drop_piece()
@@ -45,7 +46,7 @@ class Tetris:
             else:
                 pygame.mixer.music.stop()
 
-    def HighScore(self):
+    def HighScore(self): #최고점수 save.txt파일에 저장
         try:
             f = open('assets/save.txt', 'r')
             l = f.read()
@@ -87,7 +88,7 @@ class Tetris:
                 self.HighScore()
                 self.check_reset = True
                 self.board.init_board()
-            for event in pygame.event.get():
+            for event in pygame.event.get(): #게임 진행 중에
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
