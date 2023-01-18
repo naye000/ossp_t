@@ -1,6 +1,7 @@
 import pygame, sys, time
 from pygame.locals import *
 from Board import *
+from variable import Var
 
 #               R    G    B
 WHITE       = (255, 255, 255)
@@ -69,7 +70,7 @@ class Tetris:
         icon = pygame.image.load('assets/images/icon.png')
         pygame.display.set_icon(icon)
         pygame.display.set_caption('Tetris')
-        self.board.level_speed()
+        self.board.level_speed() # 추가 - level1에서 속도
         pygame.time.set_timer(pygame.USEREVENT, 500)
         start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
         start_sound.play()
