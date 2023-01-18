@@ -1,7 +1,8 @@
 import pygame, sys, time #pygame, sys, time선언
 from pygame.locals import *
 from Board import *
-
+import random
+from variable import Var
 #               R    G    B
 WHITE       = (255, 255, 255)
 GRAY        = (185, 185, 185)
@@ -66,10 +67,8 @@ class Tetris:
 
     def run(self):
         pygame.init()
-        
-        print(width, height)
         self.board = Board(self.mode)
-        self.board.screen.fill(Var.MAIN_VIOLET)
+        self.board.screen.fill(Var.WHITE)
         icon = pygame.image.load('assets/images/icon.png')
         pygame.display.set_icon(icon)
         pygame.display.set_caption('Tetris')

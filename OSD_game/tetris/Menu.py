@@ -65,8 +65,8 @@ class Menu:
         self.menu.add_vertical_margin(self.margin_main)
         self.menu.add_label("    --Start game--    ",selectable=False,font_size=self.font_main)
         self.menu.add_vertical_margin(self.margin_show)
-        self.menu.add_button('      Single mode      ', self.start_the_game,font_size=self.font_main)
-        self.menu.add_button('       MiNi mode       ', self.start_the_Mini,font_size=self.font_main)
+        self.menu.add_button('      Cute mode      ', self.start_the_game,font_size=self.font_main)
+        self.menu.add_button('       Dark mode       ', self.start_the_dark,font_size=self.font_main)
         self.menu.add_button('           back            ', self.reset,font_size=self.font_main)
     
 
