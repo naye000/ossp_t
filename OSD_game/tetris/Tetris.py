@@ -69,6 +69,7 @@ class Tetris:
         icon = pygame.image.load('assets/images/icon.png')
         pygame.display.set_icon(icon)
         pygame.display.set_caption('Tetris')
+        self.board.level_speed()
         pygame.time.set_timer(pygame.USEREVENT, 500)
         start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
         start_sound.play()
