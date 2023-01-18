@@ -7,9 +7,11 @@
 ![source](https://user-images.githubusercontent.com/121841830/211716086-6bd65858-2b45-48c8-b6aa-e8f332a7a33e.png)
 https://github.com/CSID-DGU/2020-2-OSSP-CP--YamiYami_Z_Z-5
 //변경
-https://github.com/hbseo/OSD_game.git
+https://github.com/hbseo/OSD_game.git <테트리스 소스
+https://github.com/ppizarror/pygame-menu <메뉴 
+
 # license
-GNU
+GNUv3.0
 
 # 진행 중인 기존 소스와 차별점
 

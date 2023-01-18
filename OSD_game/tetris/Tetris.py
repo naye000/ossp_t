@@ -1,4 +1,4 @@
-import pygame, sys, time
+import pygame, sys, time #pygame, sys, time선언
 from pygame.locals import *
 from Board import *
 
@@ -25,13 +25,13 @@ class Tetris:
         self.check_reset = True
 
     def handle_key(self, event_key):
-        if event_key == K_DOWN or event_key == K_s:
+        if event_key == K_DOWN or event_key == K_s: #아래로
             self.board.drop_piece()
-        elif event_key == K_LEFT or event_key == K_a:
+        elif event_key == K_LEFT or event_key == K_a: #왼쪽으로
             self.board.move_piece(dx=-1, dy=0)
-        elif event_key == K_RIGHT or event_key == K_d:
+        elif event_key == K_RIGHT or event_key == K_d: #오른쪽으로
             self.board.move_piece(dx=1, dy=0)
-        elif event_key == K_UP or event_key == K_w:
+        elif event_key == K_UP or event_key == K_w: #돌리기
             self.board.rotate_piece()
         elif event_key == K_SPACE:
             self.board.full_drop_piece()
@@ -58,14 +58,18 @@ class Tetris:
                 h_s = l
             self.board.HS(str(h_s))
         except:
-            f = open('assets/save.txt', 'w')
-            f.write(str(self.board.score))
+            f = open('assets/save.txt', 'w') #저장된걸 가져온다
+            f.write(str(self.board.score)) #점수 입력
             f.close()
             self.board.HS(str(self.board.score))
 
 
     def run(self):
         pygame.init()
+        
+        print(width, height)
+        self.board = Board(self.mode)
+        self.board.screen.fill(Var.MAIN_VIOLET)
         icon = pygame.image.load('assets/images/icon.png')
         pygame.display.set_icon(icon)
         pygame.display.set_caption('Tetris')
