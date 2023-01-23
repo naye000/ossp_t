@@ -1,6 +1,7 @@
 import pygame, sys, datetime, time
 from pygame.locals import *
 from Piece import *
+from variable import Var
 
 #               R    G    B
 WHITE       = (255, 255, 255)
